@@ -1,250 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
-<meta name="apple-mobile-web-app-title" content="CodePen">
-<link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
-<link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
-<title>CodePen - Rolling Dice CSS Animation</title>
-<style>
-body {
-  margin: 0;
-  padding: 0;
-  background-color: white;
-}
-.dice {
-  height: 200px;
-  width: 200px;
-  position: relative;
-  transform-style: preserve-3d;
-  transform: translateZ(-100px) rotateY(-45deg) rotateX(-45deg);
-  transition: transform 1s;
-}
-.panel {
-  border-radius: 10px;
-  width: 200px;
-  height: 200px;
-  perspective: 400px;
-  position: absolute;
-  left: 50%;
-  top: 30%;
-  transform: translate(-50%, -50%);
-}
-.dot {
-  display: block;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  margin: 4px;
-  background-color: gold;
-}
-.side {
-  position: absolute;
-  background-color: black;
-  width: 200px;
-  height: 200px;
-  border-radius: 10px;
-  line-height: 200px;
-}
-.one {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform: rotateX(-90deg) translateZ(100px);
-  z-index: 1;
-}
-.two {
-  display: flex;
-  justify-content: space-between;
-  transform: rotateY(180deg) translateZ(100px);
-  z-index: 2;
-}
-.two .dot:nth-of-type(2) {
-  align-self: flex-end;
-}
-.three {
-  display: flex;
-  justify-content: space-between;
-  transform: rotateY(90deg) translateZ(100px);
-  z-index: 3;
-}
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" type="image/png"
+    href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+  <meta name="apple-mobile-web-app-title" content="CodePen">
+  <link rel="shortcut icon" type="image/x-icon"
+    href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+  <link rel="mask-icon" type=""
+    href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg"
+    color="#111" />
+  <title>CodePen - Rolling Dice CSS Animation</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: white;
+    }
 
-.three .dot:nth-of-type(2) {
-  align-self: center;
-}
+    .dice {
+      height: 200px;
+      width: 200px;
+      position: relative;
+      transform-style: preserve-3d;
+      transform: translateZ(-100px) rotateY(-45deg) rotateX(-45deg);
+      transition: transform 1s;
+    }
 
-.three .dot:nth-of-type(3) {
-  align-self: flex-end;
-}
-.four {
-  z-index: 4;
-  transform: rotateY(0deg) translateZ(100px);
-}
-.four,
-.six {
-  display: flex;
-  justify-content: space-between;
-}
+    .panel {
+      border-radius: 10px;
+      width: 200px;
+      height: 200px;
+      perspective: 400px;
+      position: absolute;
+      left: 50%;
+      top: 30%;
+      transform: translate(-50%, -50%);
+    }
 
-.four .kolona,
-.six .kolona {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+    .dot {
+      display: block;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      margin: 4px;
+      background-color: gold;
+    }
 
-.five {
-  display: flex;
-  justify-content: space-between;
-  transform: rotateY(-90deg) translateZ(100px);
-  z-index: 5;
-}
+    .side {
+      position: absolute;
+      background-color: black;
+      width: 200px;
+      height: 200px;
+      border-radius: 10px;
+      line-height: 200px;
+    }
 
-.five .kolona {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+    .one {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: rotateX(-90deg) translateZ(100px);
+      z-index: 1;
+    }
 
-.five .kolona:nth-of-type(2) {
-  justify-content: center;
-}
-.six {
-  transform: rotateX(90deg) translateZ(100px);
-  z-index: 6;
-}
+    .two {
+      display: flex;
+      justify-content: space-between;
+      transform: rotateY(180deg) translateZ(100px);
+      z-index: 2;
+    }
 
-/*Customization panel*/
-.custom {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: calc(20% + 250px);
-}
-.custom > * {
-  margin: 10px;
-}
-.custom > button {
-  font-size: 20px;
-  font-family: "Verdana";
-  width: 200px;
-  height: 85px;
-  color: gold;
-  background-color: black;
-  border: none;
-  border-radius: 10px;
-}
-.picker {
-  border: none;
-}
-.spinner {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-</style>
-<script>
-  window.console = window.console || function(t) {};
-</script>
-<script>
-  if (document.location.search.match(/type=embed/gi)) {
-    window.parent.postMessage("resize", "*");
-  }
-</script>
+    .two .dot:nth-of-type(2) {
+      align-self: flex-end;
+    }
+
+    .three {
+      display: flex;
+      justify-content: space-between;
+      transform: rotateY(90deg) translateZ(100px);
+      z-index: 3;
+    }
+
+    .three .dot:nth-of-type(2) {
+      align-self: center;
+    }
+
+    .three .dot:nth-of-type(3) {
+      align-self: flex-end;
+    }
+
+    .four {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 4;
+      transform: rotateY(0deg) translateZ(100px);
+    }
+
+    .six {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .five {
+      display: flex;
+      justify-content: space-between;
+      transform: rotateY(-90deg) translateZ(100px);
+      z-index: 5;
+    }
+
+    .five .dot:nth-of-type(2) {
+      align-self: flex-end;
+    }
+
+    .six {
+      display: flex;
+      justify-content: space-between;
+      transform: rotateX(90deg) translateZ(100px);
+      z-index: 6;
+    }
+
+    .six .dot:nth-of-type(2) {
+      align-self: center;
+    }
+
+    .six .dot:nth-of-type(3) {
+      align-self: flex-end;
+    }
+
+    /*Customization panel*/
+    .custom {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: calc(20% + 250px);
+    }
+
+    .custom>* {
+      margin: 10px;
+    }
+
+    .custom>button {
+      font-size: 20px;
+      font-family: "Verdana";
+      width: 200px;
+      height: 85px;
+      color: gold;
+      background-color: black;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .picker {
+      border: none;
+    }
+
+    .spinner {
+      background-color: #4CAF50;
+      /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+    }
+  </style>
+  <script>
+    window.console = window.console || function (t) { };
+  </script>
+  <script>
+    if (document.location.search.match(/type=embed/gi)) {
+      window.parent.postMessage("resize", "*");
+    }
+  </script>
 </head>
+
 <body style="background-color: white;">
-<div class="panel">
-<div class="dice">
-<div class="side one">
-<span class="dot"></span>
-</div>
-<div class="side two">
-<span class="dot"></span>
-<span class="dot"></span>
-</div>
-<div class="side three">
-<span class="dot"></span>
-<span class="dot"></span>
-<span class="dot"></span>
-</div>
-<div class="side four">
-<div class="kolona">
-<span class="dot"></span>
-<span class="dot"></span>
-</div>
-<div class="kolona">
-<span class="dot"></span>
-<span class="dot"></span>
-</div>
-</div>
-<div class="side five">
-<div class="kolona">
-<span class="dot"></span>
-<span class="dot"></span>
-</div>
-<div class="kolona">
-<span class="dot"></span>
-</div>
-<div class="kolona">
-<span class="dot"></span>
-<span class="dot"></span>
-</div>
-</div>
-<div class="side six">
-<div class="kolona">
-<span class="dot"></span>
-<span class="dot"></span>
-</div>
-<div class="kolona">
-<span class="dot"></span>
-<span class="dot"></span>
-</div>
-<div class="kolona">
-<span class="dot"></span>
-<span class="dot"></span>
-</div>
-</div>
-</div>
-</div>
-<div class="custom">
-<button class="spinner" id="spin">Spin random!!!</button>
-</div>
-<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
-<script id="rendered-js">
-$("#dice-color").val("#000000");
-$("#dot-color").val("#ffd700");
-let rnd;
-let x, y;
-$("#spin").click(function (e) {
-  e.preventDefault();
-  rnd = Math.floor(Math.random() * 6 + 1);
-  switch (rnd) {
-    case 1:
-      x = 720;
-      y = 810;
-      break;
-    case 6:
-      x = 720;
-      y = 990;
-      break;
-    default:
-      x = 720 + (6 - rnd) * 90;
-      y = 900;
-      break;}
+  <div class="panel">
+    <div class="dice">
+      <div class="side one">
+        <span class="dot"></span>
+      </div>
+      <div class="side two">
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <div class="side three">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <div class="side four">
+        <span class="dot"></span>
+      </div>
+      <div class="side five">
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <div class="side six">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
+  <div class="custom">
+    <button class="spinner" id="spin">Spin random!!!</button>
+  </div>
+  <script
+    src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+  <script id="rendered-js">
+    $("#dice-color").val("#000000");
+    $("#dot-color").val("#ffd700");
+    let rnd;
+    let x, y;
+    $("#spin").click(function (e) {
+      e.preventDefault();
+      rnd = Math.floor(Math.random() * 6 + 1);
+      switch (rnd) {
+        case 1:
+          x = 720;
+          y = 810;
+          break;
+        case 6:
+          x = 720;
+          y = 990;
+          break;
+        default:
+          x = 720 + (6 - rnd) * 90;
+          y = 900;
+          break;
+      }
 
-  $(".dice").css(
-  "transform",
-  "translateZ(-100px) rotateY(" + x + "deg) rotateX(" + y + "deg)");
+      $(".dice").css(
+        "transform",
+        "translateZ(-100px) rotateY(" + x + "deg) rotateX(" + y + "deg)");
 
-});
+    });
 //# sourceURL=pen.js
-    </script>
+  </script>
 </body>
+
 </html>
